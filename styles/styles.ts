@@ -10,8 +10,7 @@ export const styles = StyleSheet.create({
   },
   backgroundGif: {
     position: 'absolute',
-    width: '100%',
-    maxWidth: 480,
+    width: 480,
     bottom: '0%',
   },
   title: {
