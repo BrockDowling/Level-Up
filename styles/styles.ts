@@ -1,4 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+// Get the window dimensions dynamically
+const { width, height } = Dimensions.get("window");
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,17 +13,17 @@ export const styles = StyleSheet.create({
   },
   gameWindow: {
     alignItems: "center",
-    backgroundColor: "#ffffff",
-    borderRadius: 30,
-    maxWidth: 500,
-    height: "75%",
-    width: "100%",
+    backgroundColor: "#000000",
+    width: "100%", // Take the full width of the parent (container)
+    height: "80%", // Take a percentage of the viewport height (adjust as needed)
+    maxWidth: "120%", // Limit to 90% of the screen width for mobile-first feel
+    maxHeight: "120%", // Limit to 60% of the screen height
     marginBottom: 30,
   },
   backgroundGif: {
-    position: 'absolute',
+    position: "absolute",
     width: 480,
-    bottom: '0%',
+    bottom: "0%",
   },
   title: {
     paddingTop: 30,

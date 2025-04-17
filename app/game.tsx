@@ -14,14 +14,13 @@ export default function Game() {
         You chose the {path || "unknown"} path!
       </Text>
       <View style={styles.gameWindow}>
-        <Text style={styles.welcome}>
-          This is where the game will go
-        </Text>
-        <Animated.Image 
-            source={require('../assets/images/map.gif')} 
-            style={[styles.gameWindow, { opacity: gifOpacity }]}
+        <Animated.Image
+          source={require("../assets/images/map1.gif")}
+          style={[
+            styles.gameWindow,
+            { opacity: gifOpacity, resizeMode: "contain"}, // Ensure the image scales proportionally
+          ]}
         />
-        {/* Add game components here */}
       </View>
     </View>
   );
