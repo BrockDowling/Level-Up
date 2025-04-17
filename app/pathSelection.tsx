@@ -1,52 +1,29 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import { styles } from "../styles/styles";
 import { router } from "expo-router";
+import { Button } from "../components/Button";
 
 export default function Game() {
   const handleFunny = () => {
-    router.push;
+    router.push({ pathname: "../game", params: { path: "Funny" } });
   };
   const handleNice = () => {
-    router.push;
+    router.push({ pathname: "../game", params: { path: "Nice" } });
   };
   const handleRude = () => {
-    router.push;
+    router.push({ pathname: "../game", params: { path: "Rude" } });
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>PATH SELECTION</Text>
-      
-      <Text style={styles.welcome}>
-        What will you choose to be?
-      </Text>
-      
-        <View style={styles.title}>
-            <TouchableOpacity onPress={handleRude}>
-                <View style={styles.button}>
-                <Text style={styles.buttonText}>
-                    Rude
-                </Text>
-                </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={handleNice}>
-                <View style={styles.button}>
-                <Text style={styles.buttonText}>
-                    Nice
-                </Text>
-                </View>
-            </TouchableOpacity>
-            
-            <TouchableOpacity onPress={handleFunny}>
-                <View style={styles.button}>
-                <Text style={styles.buttonText}>
-                    Funny
-                </Text>
-                </View>
-            </TouchableOpacity>
-        </View>
+      <Text style={styles.welcome}>What will you choose to be?</Text>
+      <View style={styles.title}>
+        <Button title="Rude" onPress={handleRude} />
+        <Button title="Nice" onPress={handleNice} />
+        <Button title="Funny" onPress={handleFunny} />
+      </View>
     </View>
   );
 }
