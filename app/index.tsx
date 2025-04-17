@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { View, Text, Animated, TouchableOpacity } from "react-native";
 import { styles } from "../styles/styles";
+import { router } from "expo-router";
 
 export default function Index() {
   // Animation values
@@ -38,8 +39,8 @@ export default function Index() {
   }, []);
 
   const handleButtonPress = () => {
-    console.log("Button pressed!");
-    // We will add game logic here later
+    // Navigate to the game screen when the button is pressed
+    router.push("/pathSelection");
   };
 
   return (
@@ -57,7 +58,7 @@ export default function Index() {
 
       {/* Animated welcome message */}
       <Animated.Text style={[styles.welcome, { opacity: welcomeOpacity }]}>
-        Where reality becomes gamified
+        Do you have what it takes?
       </Animated.Text>
       
       {/* Start Button with TouchableOpacity */}

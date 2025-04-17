@@ -8,6 +8,17 @@ export const styles = StyleSheet.create({
     backgroundColor: "#000000",
     padding: 20,
   },
+  gameWindow: {
+    alignItems: "center",
+    backgroundColor: "#232323",
+    padding: 10,
+    width: "100%",
+    height: "80%",
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "#FF4B0D",
+
+  },
   backgroundGif: {
     position: 'absolute',
     width: 480,
@@ -18,9 +29,10 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#FF4B0D",
     marginBottom: 20,
+    textAlign: "center",
   },
   welcome: {
-    fontSize: 24,
+    fontSize: 20,
     color: "#FFFFFF",
     textAlign: "center",
     marginBottom: 40,
@@ -32,8 +44,10 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 2,
     borderColor: "#FF4B0D",
+    marginVertical: 10,
   },
   buttonText: {
+    textAlign: "center",
     color: "#FF4B0D",
     fontSize: 18,
     fontWeight: "bold",
