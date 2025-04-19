@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, FlatList, Animated } from "react-native";
 import { styles } from "../styles/styles";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 
 export default function Game() {
   const { path } = useLocalSearchParams(); // Get the path parameter ("Rude", "Nice", "Funny")
   const [gifOpacity] = useState(1); // Define gifOpacity with a default value
+
+  const handleTalkToNPC = () => {
+    router.push("/npc_load_screen");
+  };
 
   return (
     <View style={styles.container}>
@@ -22,6 +26,10 @@ export default function Game() {
           ]}
         />
       </View>
+      {/* Talk to NPC button */}
+      <TouchableOpacity onPress={handleTalkToNPC} style={styles.button}>
+        <Text style={styles.buttonText}>Talk to NPC</Text>
+      </TouchableOpacity>
     </View>
   );
 }

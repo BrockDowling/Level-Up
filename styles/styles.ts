@@ -54,4 +54,11 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  response: {
+    fontSize: 18,
+    color: '#FFFFFF',
+    marginTop: 20,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
 });
