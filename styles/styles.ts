@@ -1,10 +1,18 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, Platform } from "react-native";
 
 // Get the window dimensions dynamically
 const { width, height } = Dimensions.get("window");
 
+// Utility function to calculate font size based on screen width
+const scaleFont = (size: number) => (width / 500) * size;
+
 export const styles = StyleSheet.create({
   container: {
+    fontFamily: Platform.select({
+      ios: 'Bungee',
+      android: 'Bungee',
+      web: "'Bungee', sans-serif"
+    }),
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -14,11 +22,8 @@ export const styles = StyleSheet.create({
   gameWindow: {
     alignItems: "center",
     backgroundColor: "#000000",
-    width: "100%", // Take the full width of the parent (container)
-    height: "80%", // Take a percentage of the viewport height (adjust as needed)
-    maxWidth: "120%", // Limit to 90% of the screen width for mobile-first feel
-    maxHeight: "120%", // Limit to 60% of the screen height
-    marginBottom: 30,
+    width: width,
+    height: height * 0.5,
   },
   backgroundGif: {
     position: "absolute",
@@ -26,15 +31,24 @@ export const styles = StyleSheet.create({
     bottom: "0%",
   },
   title: {
-    paddingTop: 30,
-    fontSize: 40,
+    fontFamily: Platform.select({
+      ios: 'Bungee',
+      android: 'Bungee',
+      web: "'Bungee', sans-serif"
+    }),
+    fontSize: scaleFont(40),
     fontWeight: "bold",
     color: "#FF4B0D",
     marginBottom: 20,
     textAlign: "center",
   },
   welcome: {
-    fontSize: 20,
+    fontFamily: Platform.select({
+      ios: 'Karla',
+      android: 'Karla',
+      web: "'Karla', sans-serif"
+    }),
+    fontSize: scaleFont(20),
     color: "#FFFFFF",
     textAlign: "center",
     marginBottom: 40,
@@ -46,16 +60,27 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 2,
     borderColor: "#FF4B0D",
-    marginVertical: 10,
+
+    marginBottom: 20,
   },
   buttonText: {
+    fontFamily: Platform.select({
+      ios: 'Karla',
+      android: 'Karla',
+      web: "'Karla', sans-serif"
+    }),
     textAlign: "center",
     color: "#FF4B0D",
-    fontSize: 18,
+    fontSize: scaleFont(18),
     fontWeight: "bold",
   },
   response: {
-    fontSize: 18,
+    fontFamily: Platform.select({
+      ios: 'Karla',
+      android: 'Karla',
+      web: "'Karla', sans-serif"
+    }),
+    fontSize: scaleFont(18),
     color: '#FFFFFF',
     marginTop: 20,
     marginBottom: 20,

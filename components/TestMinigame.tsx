@@ -1,27 +1,10 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, Dimensions } from "react-native";
+import { styles } from "../styles/styles"; // Import your styles from the styles file
+import React from "react";
 
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "#121212",
-    },
-    title: { fontSize: 24, color: "#FFFFFF", marginBottom: 20 },
-    button: {
-      backgroundColor: "#FF4B0D",
-      padding: 15,
-      borderRadius: 10,
-      marginVertical: 10,
-    },
-    buttonText: { fontSize: 18, color: "#FFFFFF" },
-  });
-
-export function FakeMinigame({
-  onComplete,
-}: {
+export const FakeMinigame: React.FC<{
   onComplete: (result: boolean) => void;
-}) {
+}> = ({ onComplete }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Fake Minigame</Text>
@@ -33,4 +16,4 @@ export function FakeMinigame({
       </TouchableOpacity>
     </View>
   );
-}
+};

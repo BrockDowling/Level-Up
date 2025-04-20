@@ -37,9 +37,10 @@
     "experiments": {
       "typedRoutes": true
     },
-    "fonts": {
-      "asset": "assets/fonts/Nabla-Regular-VariableFont.ttf",
-      "family": "Nabla"
-    }
+    "fonts": ["assets/fonts/Bungee.ttf", "assets/fonts/Karla.ttf", "assets/fonts/VT323.ttf"],
+    "assetBundlePatterns": [
+      "**/*",
+      "assets/fonts/*"
+    ]
   }
 }
