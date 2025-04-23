@@ -5,7 +5,14 @@
    
 ![Level Up Logo](https://cdn-icons-png.flaticon.com/128/5184/5184141.png)
 
-Welcome to the **Level Up** project! 
+Welcome to the **Level Up** project!
+<pre>
+The goal of this project is to create a game where the user
+can level themselves up, rather than an in game character ONLY.
+Solve the proposed challeneges in order to progress.
+Upon completion of the game, the user will be prepared
+for various conversational scenarios in the real world!
+</pre>
 
 This is an app built using [`create-expo-app`](https://www.npmjs.com/package/create-expo-app). 
 
