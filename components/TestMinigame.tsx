@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, Dimensions } from "react-native";
-import { styles } from "../styles/styles"; // Import your styles from the styles file
+import { View, Text, TouchableOpacity } from "react-native";
+import { styles } from "../styles/styles";
 import React from "react";
 
 export const FakeMinigame: React.FC<{

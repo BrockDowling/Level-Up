@@ -86,4 +86,25 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
+  board: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  row: {
+    flexDirection: "row",
+  },
+  cell: {
+    width: 100,
+    height: 100,
+    margin: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#333",
+  },
+  cellText: {
+    fontSize: 32,
+    fontWeight: "bold",
+  },
 });

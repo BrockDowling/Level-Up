@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, FlatList, Animated } from "react-native";
+import { View, Text, TouchableOpacity, Animated } from "react-native";
 import { styles } from "../styles/styles";
 import { router, useLocalSearchParams } from "expo-router";
 
