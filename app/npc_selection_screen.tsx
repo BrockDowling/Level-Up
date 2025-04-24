@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import { styles } from "@/styles/styles";
 import { Oddish } from "@/components/Oddish";
+import { RPSNPC } from "@/components/RPSNPC";
 import NPCLoadScreen from "./npc_load_screen";
 import { NPC } from "@/components/NPC";
 import { Audio } from "expo-av";
@@ -9,7 +10,7 @@ import { Audio } from "expo-av";
 {
   /* Add the rest of the NPC's here */
 }
-const npcList = [Oddish];
+const npcList = [Oddish, RPSNPC];
 
 export default function NPCSelectionScreen() {
   const [selectedNPC, setSelectedNPC] = useState<NPC | null>(null);
