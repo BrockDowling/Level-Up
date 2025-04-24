@@ -122,24 +122,45 @@ export const TicTacToe: React.FC<{
   };
 
   return (
-    <View style={styles.board}>
+<View style={styles.container}>
       <Text style={styles.title}>Tic Tac Toe!</Text>
-      {[0, 1, 2].map((row) => (
-        <View key={row} style={styles.row}>
-          {[0, 1, 2].map((col) => {
-            const index = row * 3 + col;
-            return (
-              <TouchableOpacity
-                key={index}
-                style={styles.cell}
-                onPress={() => handlePress(index)}
-              >
-                <Text style={styles.cellText}>{board[index]}</Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-      ))}
+      <Text style={styles.gameStatus}>
+        {winner
+          ? winner === "tie"
+            ? "It's a Tie!"
+            : `Player ${winner} Wins!`
+          : `Player ${currentPlayer}'s Turn`}
+      </Text>
+      <View style={styles.ticTacToeBoard}>
+        {[0, 1, 2].map((row) => (
+          <View key={row} style={styles.row}>
+            {[0, 1, 2].map((col) => {
+              const index = row * 3 + col;
+              return (
+                <TouchableOpacity
+                  key={index}
+                  style={[
+                    styles.ticTacToeCell,
+                    board[index] && styles.ticTacToeCellFilled,
+                  ]}
+                  onPress={() => handlePress(index)}
+                  disabled={!!board[index] || !!winner}
+                >
+                  <Text
+                    style={[
+                      styles.ticTacToeCellText,
+                      board[index] === "X" && styles.ticTacToeX,
+                      board[index] === "O" && styles.ticTacToeO,
+                    ]}
+                  >
+                    {board[index]}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        ))}
+      </View>
     </View>
   );
 };

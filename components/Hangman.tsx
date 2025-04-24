@@ -27,6 +27,7 @@ export const Hangman: React.FC<{
   const maxWrongGuesses = 6;
   const [gameOver, setGameOver] = useState(false);
   const [won, setWon] = useState(false);
+  const [isGuessing, setIsGuessing] = useState(false);
 
   // ASCII art for hangman stages
   const hangmanArt = [
@@ -66,7 +67,7 @@ export const Hangman: React.FC<{
      ______
      |    |
      O    |
-    /|\   |
+    /|\\   |
           |
           |
     =========`,
@@ -74,7 +75,7 @@ export const Hangman: React.FC<{
      ______
      |    |
      O    |
-    /|\   |
+    /|\\   |
     /     |
           |
     =========`,
@@ -82,35 +83,32 @@ export const Hangman: React.FC<{
      ______
      |    |
      O    |
-    /|\   |
-    / \   |
+    /|\\   |
+    / \\  |
           |
     =========`,
   ];
 
-  // Check if the player has won
   const hasWon = () => {
     return word.split("").every((letter) => guessedLetters.includes(letter));
   };
 
-  // Handle letter guess
   const handleGuess = (letter: string) => {
-    if (gameOver || guessedLetters.includes(letter)) return;
+    if (gameOver || guessedLetters.includes(letter) || isGuessing) return;
 
-    // Play button sound
+    setIsGuessing(true); // Prevent rapid clicks
     Audio.Sound.createAsync(require("../assets/sounds/button.mp3")).then(
       ({ sound }) => {
         sound.playAsync();
       }
     );
 
-    // Update guessed letters
     setGuessedLetters([...guessedLetters, letter]);
-
-    // Check if the guess is wrong
     if (!word.includes(letter)) {
       setWrongGuesses(wrongGuesses + 1);
     }
+
+    setTimeout(() => setIsGuessing(false), 200); // Debounce for 200ms
   };
 
   // Update game state
@@ -141,69 +139,43 @@ export const Hangman: React.FC<{
     <View style={styles.container}>
       <Text style={styles.title}>Hangman!</Text>
 
-      {/* Hangman ASCII art */}
-        <Text
-          style={{
-            fontFamily: "VT323",
-            fontSize: 14,
-            color: "#FFFFFF",
-            textAlign: "left",
-            lineHeight: 16, 
-            includeFontPadding: false,
-            backgroundColor: "#1E1E1E",
-            padding: 10,
-            borderRadius: 5,
-          }}
-          numberOfLines={10}
-          adjustsFontSizeToFit={false}
-        >
-          {hangmanArt[wrongGuesses].trim()}
+      <View style={styles.hangmanBoard}>
+        <View style={{ alignItems: "center", marginVertical: 10 }}>
+          <Text
+            style={styles.hangmanArt}
+            numberOfLines={10}
+            adjustsFontSizeToFit={false}
+          >
+            {hangmanArt[wrongGuesses].trim()}
+          </Text>
+        </View>
+
+        <Text style={styles.hangmanStatus}>
+          Wrong Guesses: {wrongGuesses}/{maxWrongGuesses}
         </Text>
 
-      {/* Word display */}
-      <Text style={[styles.welcome, { fontFamily: "VT323", fontSize: 30 }]}>
-        {renderWord()}
-      </Text>
+        <Text style={styles.hangmanWord}>{renderWord()}</Text>
 
-      {/* Game status */}
-      {gameOver && (
-        <Text style={styles.welcome}>
-          {won ? "You Won!" : `Game Over! The word was ${word}`}
-        </Text>
-      )}
-      
-      {/* Continue button */}
-      {gameOver && (
-        <TouchableOpacity style={styles.button} onPress={() => onComplete(won)}>
-          <Text style={styles.buttonText}>Continue</Text>
-        </TouchableOpacity>
-      )}
+        {gameOver && (
+          <Text style={styles.gameStatus}>
+            {won ? "You Won!" : `Game Over! The word was ${word}`}
+          </Text>
+        )}
+      </View>
 
-      {/* Letter buttons */}
       {!gameOver && (
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "center",
-          }}
-        >
+        <View style={styles.hangmanLetterGrid}>
           {letters.map((letter, index) => (
             <TouchableOpacity
               key={index}
               style={[
-                styles.button,
-                {
-                  width: 40,
-                  height: 40,
-                  margin: 5,
-                  opacity: guessedLetters.includes(letter) ? 0.5 : 1,
-                },
+                styles.hangmanLetterButton,
+                guessedLetters.includes(letter) && styles.hangmanLetterButtonDisabled,
               ]}
               onPress={() => handleGuess(letter)}
-              disabled={guessedLetters.includes(letter)}
+              disabled={guessedLetters.includes(letter) || isGuessing}
             >
-              <Text style={styles.buttonText}>{letter}</Text>
+              <Text style={styles.hangmanLetterText}>{letter}</Text>
             </TouchableOpacity>
           ))}
         </View>

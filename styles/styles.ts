@@ -107,4 +107,174 @@ export const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: "bold",
   },
+  // New styles for Tic-Tac-Toe
+  ticTacToeBoard: {
+    backgroundColor: "#1E1E1E", // Dark background for contrast
+    padding: 10,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: "#FF4B0D",
+    marginVertical: 20,
+  },
+  ticTacToeCell: {
+    width: Math.min(width * 0.25, 100), // Responsive cell size
+    height: Math.min(width * 0.25, 100),
+    margin: 4,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "#FF4B0D",
+  },
+  ticTacToeCellFilled: {
+    backgroundColor: "#2A2A2A", // Darker when filled
+  },
+  ticTacToeCellText: {
+    fontFamily: Platform.select({
+      ios: "Bungee",
+      android: "Bungee",
+      web: "'Bungee', sans-serif",
+    }),
+    fontSize: scaleFont(40),
+    fontWeight: "bold",
+  },
+  ticTacToeX: {
+    color: "#FF4B0D", // Red for X
+  },
+  ticTacToeO: {
+    color: "#FFFFFF", // White for O
+  },
+  gameStatus: {
+    fontFamily: Platform.select({
+      ios: "Karla",
+      android: "Karla",
+      web: "'Karla', sans-serif",
+    }),
+    fontSize: scaleFont(24),
+    color: "#FFFFFF",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  hangmanBoard: {
+    backgroundColor: "#1E1E1E",
+    padding: 15,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: "#FF4B0D",
+    marginVertical: 20,
+    alignItems: "center",
+  },
+  hangmanArt: {
+    fontFamily: "VT323",
+    fontSize: scaleFont(14),
+    color: "#FFFFFF",
+    textAlign: "left",
+    lineHeight: scaleFont(16),
+    includeFontPadding: false,
+    backgroundColor: "#2A2A2A",
+    padding: 10,
+    borderRadius: 5,
+  },
+  hangmanStatus: {
+    fontFamily: Platform.select({
+      ios: "Karla",
+      android: "Karla",
+      web: "'Karla', sans-serif",
+    }),
+    fontSize: scaleFont(18),
+    color: "#FFFFFF",
+    marginVertical: 10,
+  },
+  hangmanWord: {
+    fontFamily: "VT323",
+    fontSize: scaleFont(30),
+    color: "#FF4B0D",
+    textAlign: "center",
+    marginVertical: 15,
+  },
+  hangmanLetterGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    maxWidth: width * 0.8,
+  },
+  hangmanLetterButton: {
+    width: scaleFont(40),
+    height: scaleFont(40),
+    margin: 5,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "#FF4B0D",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  hangmanLetterButtonDisabled: {
+    backgroundColor: "#2A2A2A",
+    opacity: 0.5,
+  },
+  hangmanLetterText: {
+    fontFamily: Platform.select({
+      ios: "Karla",
+      android: "Karla",
+      web: "'Karla', sans-serif",
+    }),
+    fontSize: scaleFont(20),
+    color: "#FF4B0D",
+    fontWeight: "bold",
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  winTitle: {
+    fontFamily: Platform.select({
+      ios: "Bungee",
+      android: "Bungee",
+      web: "'Bungee', sans-serif",
+    }),
+    fontSize: scaleFont(48),
+    fontWeight: "bold",
+    color: "#FF4B0D",
+    textAlign: "center",
+    marginVertical: 30,
+  },
+  creditsContainer: {
+    alignItems: "center",
+    backgroundColor: "#1E1E1E",
+    padding: 20,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: "#FF4B0D",
+    width: width * 0.9,
+  },
+  creditsSectionTitle: {
+    fontFamily: Platform.select({
+      ios: "Bungee",
+      android: "Bungee",
+      web: "'Bungee', sans-serif",
+    }),
+    fontSize: scaleFont(24),
+    color: "#FF4B0D",
+    marginVertical: 15,
+    textAlign: "center",
+  },
+  creditsText: {
+    fontFamily: Platform.select({
+      ios: "Karla",
+      android: "Karla",
+      web: "'Karla', sans-serif",
+    }),
+    fontSize: scaleFont(20),
+    color: "#FFFFFF",
+    marginVertical: 10,
+    textAlign: "center",
+  }
 });

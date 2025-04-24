@@ -1,86 +1,69 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  View,
-  Text,
-  Animated,
-  Dimensions,
-  StyleSheet,
-} from "react-native";
+import { View, Text, Animated, Dimensions, TouchableOpacity } from "react-native";
 import { styles } from "@/styles/styles";
+import { router } from "expo-router";
+import { Audio } from "expo-av";
 
 const { height: screenHeight } = Dimensions.get("window");
 
 export default function GameWinScreen() {
   const scrollAnim = useRef(new Animated.Value(screenHeight)).current;
+  const fadeAnim = useRef(new Animated.Value(1)).current;
   const [showStaticWin, setShowStaticWin] = useState(true);
 
   useEffect(() => {
-    // Show static "You win!" for 2 seconds, then begin scroll
+    // Fade out static "You win!" and start scrolling credits
+    const fadeOut = Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 2000,
+      useNativeDriver: true,
+    });
+
     const delay = setTimeout(() => {
-      setShowStaticWin(false);
-      Animated.timing(scrollAnim, {
-        toValue: -screenHeight * 2.5,
-        duration: 30000,
-        useNativeDriver: true,
-      }).start();
-    }, 2000); // 2-second pause
+      fadeOut.start(() => {
+        setShowStaticWin(false);
+        Animated.timing(scrollAnim, {
+          toValue: -screenHeight * 3, // Adjusted for longer scroll
+          duration: 30000, // Slower scroll for readability
+          useNativeDriver: true,
+        }).start();
+      });
+    }, 800);
 
     return () => clearTimeout(delay);
-  }, []);
+  }, [fadeAnim, scrollAnim]);
 
   return (
-    <View style={[styles.container, { overflow: "hidden" }]}>
-      {/* Static title that disappears after 2 seconds */}
+    <View style={styles.container}>
+      {/* Static "You win!" with fade-out */}
       {showStaticWin && (
-        <View style={StyleSheet.absoluteFillObject}>
-          <View style={styles.centered}>
-            <Text style={[styles.title, credits.staticWin]}>You win!</Text>
-          </View>
-        </View>
+        <Animated.View
+          style={[styles.centered, { opacity: fadeAnim }]}
+        >
+          <Text style={styles.winTitle}>You Win!</Text>
+        </Animated.View>
       )}
 
       {/* Scrolling credits block */}
       <Animated.View
-        style={{
-          transform: [{ translateY: scrollAnim }],
-          alignItems: "center",
-        }}
+        style={[
+          styles.creditsContainer,
+          { transform: [{ translateY: scrollAnim }] },
+        ]}
       >
-        {/* Appears again to simulate continuous motion */}
-        <Text style={[styles.title]}>You win!</Text>
-
-        <Text style={credits.text}>Developed by: Brock, Jordan and Garrett</Text>
-        <Text style={credits.text}>Styles: Brock</Text>
-        <Text style={credits.text}>Soundtrack: Garrett</Text>
-        <Text style={credits.text}>Rock Paper Scissors: Jordan</Text>
-        <Text style={credits.text}>Hangman: Brock</Text>
-        <Text style={credits.text}>Tic-Tac-Toe: Garrett</Text>
-        <Text style={credits.text}>Made with React Native</Text>
-        <Text style={credits.text}>Thanks for playing!</Text>
+        <Text style={styles.winTitle}>You Win!</Text>
+        <Text style={styles.creditsSectionTitle}>Development Team</Text>
+        <Text style={styles.creditsText}>Developed by: Brock, Jordan, Garrett</Text>
+        <Text style={styles.creditsText}>Styles: Brock</Text>
+        <Text style={styles.creditsText}>Soundtrack: Garrett</Text>
+        <Text style={styles.creditsSectionTitle}>Minigames</Text>
+        <Text style={styles.creditsText}>Rock Paper Scissors: Jordan</Text>
+        <Text style={styles.creditsText}>Hangman: Brock</Text>
+        <Text style={styles.creditsText}>Tic-Tac-Toe: Garrett</Text>
+        <Text style={styles.creditsSectionTitle}>Tech</Text>
+        <Text style={styles.creditsText}>Made with React Native</Text>
+        <Text style={styles.creditsText}>Thanks for playing!</Text>
       </Animated.View>
     </View>
   );
 }
-
-const credits = StyleSheet.create({
-  text: {
-    fontSize: 20,
-    marginVertical: 20,
-    color: "white",
-    textAlign: "center",
-  },
-  staticWin: {
-    fontSize: 48,
-    color: "white",
-    fontWeight: "bold",
-  },
-});
-
-// Helper for center screen view
-const stylesOverride = StyleSheet.create({
-  centered: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
