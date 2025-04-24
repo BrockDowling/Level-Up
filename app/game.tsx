@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Animated } from "react-native";
 import { styles } from "../styles/styles";
 import { router, useLocalSearchParams } from "expo-router";
+import { Audio } from "expo-av";
 
 export default function Game() {
   const { path } = useLocalSearchParams(); // Get the path parameter ("Rude", "Nice", "Funny")
   const [gifOpacity] = useState(1); // Define gifOpacity with a default value
 
   const handleTalkToNPC = () => {
-    router.push("/npc_load_screen");
+    Audio.Sound.createAsync(require("../assets/sounds/button.mp3")).then(
+      ({ sound }) => {
+        sound.playAsync();
+      }
+    );
+    router.push("/npc_selection_screen");
   };
 
   return (
@@ -22,7 +28,7 @@ export default function Game() {
           source={require("../assets/images/map1.gif")}
           style={[
             styles.gameWindow,
-            { opacity: gifOpacity, resizeMode: "contain"}, // Ensure the image scales proportionally
+            { opacity: gifOpacity, resizeMode: "contain" }, // Ensure the image scales proportionally
           ]}
         />
       </View>

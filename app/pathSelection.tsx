@@ -3,15 +3,31 @@ import { View, Text } from "react-native";
 import { styles } from "../styles/styles";
 import { router } from "expo-router";
 import { Button } from "../components/Button";
+import { Audio } from "expo-av";
 
 export default function Game() {
   const handleFunny = () => {
+    Audio.Sound.createAsync(require("../assets/sounds/button.mp3")).then(
+      ({ sound }) => {
+        sound.playAsync();
+      }
+    );
     router.push({ pathname: "../game", params: { path: "Funny" } });
   };
   const handleNice = () => {
+    Audio.Sound.createAsync(require("../assets/sounds/button.mp3")).then(
+      ({ sound }) => {
+        sound.playAsync();
+      }
+    );
     router.push({ pathname: "../game", params: { path: "Nice" } });
   };
   const handleRude = () => {
+    Audio.Sound.createAsync(require("../assets/sounds/button.mp3")).then(
+      ({ sound }) => {
+        sound.playAsync();
+      }
+    );
     router.push({ pathname: "../game", params: { path: "Rude" } });
   };
 

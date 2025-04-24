@@ -1,6 +1,6 @@
-import { ReactNode, useEffect, useRef } from 'react';
-import { Audio } from 'expo-av';
-import { TouchableWithoutFeedback, View } from 'react-native';
+import { ReactNode, useEffect, useRef } from "react";
+import { Audio } from "expo-av";
+import { TouchableWithoutFeedback, View } from "react-native";
 
 interface OverlayProps {
   children: ReactNode;
@@ -13,7 +13,7 @@ const OverlayMusic = ({ children }: OverlayProps) => {
   useEffect(() => {
     const loadSound = async () => {
       const { sound } = await Audio.Sound.createAsync(
-        require('../assets/music/Rest Easy.mp3'),
+        require("../assets/music/Rest Easy.mp3"),
         { isLooping: true, volume: 0.5 }
       );
       soundRef.current = sound;
@@ -33,18 +33,18 @@ const OverlayMusic = ({ children }: OverlayProps) => {
     try {
       await soundRef.current?.playAsync();
     } catch (err) {
-      console.log('Failed to play audio:', err);
+      console.log("Failed to play audio:", err);
     }
   };
 
   return (
-    <TouchableWithoutFeedback onPress={handleFirstTouch} onTouchStart={handleFirstTouch}>
-      <View style={{ flex: 1 }}>
-        {children}
-      </View>
+    <TouchableWithoutFeedback
+      onPress={handleFirstTouch}
+      onTouchStart={handleFirstTouch}
+    >
+      <View style={{ flex: 1 }}>{children}</View>
     </TouchableWithoutFeedback>
   );
 };
 
 export default OverlayMusic;
-

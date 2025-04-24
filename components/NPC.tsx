@@ -71,9 +71,11 @@ export class NPC {
   ): string[] {
     if (index < 0 || index >= this.dialogue.length) return [];
 
-    if (result === "success") return this.dialogue[index].successFollowUpOptions;
+    if (result === "success")
+      return this.dialogue[index].successFollowUpOptions;
 
-    if (result === "failure") return this.dialogue[index].failureFollowUpOptions;
+    if (result === "failure")
+      return this.dialogue[index].failureFollowUpOptions;
 
     return this.dialogue[index].tieFollowUpOptions;
   }
