@@ -36,9 +36,9 @@ export default function Game() {
       <Text style={styles.title}>PATH SELECTION</Text>
       <Text style={styles.welcome}>What will you choose to be?</Text>
       <View style={styles.title}>
-        <Button title="Rude" onPress={handleRude} />
         <Button title="Nice" onPress={handleNice} />
         <Button title="Funny" onPress={handleFunny} />
+        <Button title="Rude" onPress={handleRude} />
       </View>
     </View>
   );

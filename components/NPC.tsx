@@ -19,6 +19,7 @@ export class NPC {
   private openingQuestion: string;
   private dialogue: DialogueOption[];
   private completed: boolean;
+  private selectedIndices: number[] = [];
 
   constructor(
     name: string,
@@ -86,8 +87,18 @@ export class NPC {
     return this.dialogue[index].tieFollowUpOptions;
   }
 
+  public getSelectedIndices(): number[] {
+    return this.selectedIndices;
+  }
+
   public toggleCompleted() {
     if (this.completed) this.completed=false;
     else if (!this.completed) this.completed=true;
   }
+
+  public recordSelectedIndex(index: number): void {
+    if (!this.selectedIndices.includes(index)) {
+      this.selectedIndices.push(index);
+    }
+  }  
 }

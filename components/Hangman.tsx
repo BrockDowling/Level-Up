@@ -142,9 +142,23 @@ export const Hangman: React.FC<{
       <Text style={styles.title}>Hangman!</Text>
 
       {/* Hangman ASCII art */}
-      <Text style={[styles.cellText, { fontFamily: "VT323", fontSize: 16 }]}>
-        {hangmanArt[wrongGuesses]}
-      </Text>
+        <Text
+          style={{
+            fontFamily: "VT323",
+            fontSize: 14,
+            color: "#FFFFFF",
+            textAlign: "left",
+            lineHeight: 16, 
+            includeFontPadding: false,
+            backgroundColor: "#1E1E1E",
+            padding: 10,
+            borderRadius: 5,
+          }}
+          numberOfLines={10}
+          adjustsFontSizeToFit={false}
+        >
+          {hangmanArt[wrongGuesses].trim()}
+        </Text>
 
       {/* Word display */}
       <Text style={[styles.welcome, { fontFamily: "VT323", fontSize: 30 }]}>

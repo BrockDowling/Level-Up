@@ -4,38 +4,94 @@ import { TouchableWithoutFeedback, View } from "react-native";
 
 interface OverlayProps {
   children: ReactNode;
+  isInMinigame: boolean;
 }
 
-const OverlayMusic = ({ children }: OverlayProps) => {
-  const soundRef = useRef<Audio.Sound | null>(null);
+const OverlayMusic = ({ children, isInMinigame=false}: OverlayProps) => {
+  const restEasyRef = useRef<Audio.Sound | null>(null);
+  const minigameRef = useRef<Audio.Sound | null>(null);
   const hasInteractedRef = useRef(false);
 
   useEffect(() => {
-    const loadSound = async () => {
+    const loadSounds = async () => {
       const { sound } = await Audio.Sound.createAsync(
         require("../assets/music/Rest Easy.mp3"),
         { isLooping: true, volume: 0.5 }
       );
-      soundRef.current = sound;
+      restEasyRef.current = sound;
+
+      const { sound: minigameMusic } = await Audio.Sound.createAsync(
+        require("../assets/music/Aha! A Game!.mp3"),
+        { isLooping: true, volume: 0.5 }
+      );
+      minigameRef.current = minigameMusic;
     };
 
-    loadSound();
+    loadSounds();
 
     return () => {
-      soundRef.current?.unloadAsync();
+      restEasyRef.current?.unloadAsync();
+      minigameRef.current?.unloadAsync();
     };
   }, []);
+
+  useEffect(() => {
+    if (!hasInteractedRef.current) return;
+  
+    const swapMusic = async () => {
+      if (isInMinigame) {
+        if (restEasyRef.current) {
+          const status = await restEasyRef.current.getStatusAsync();
+          if (status.isLoaded && status.isPlaying) {
+            await restEasyRef.current.stopAsync();
+          }
+        }
+  
+        if (minigameRef.current) {
+          const status = await minigameRef.current.getStatusAsync();
+          if (status.isLoaded && !status.isPlaying) {
+            await minigameRef.current.playAsync();
+          }
+        }
+      } else {
+        if (minigameRef.current) {
+          const status = await minigameRef.current.getStatusAsync();
+          if (status.isLoaded && status.isPlaying) {
+            await minigameRef.current.stopAsync();
+          }
+        }
+  
+        if (restEasyRef.current) {
+          const status = await restEasyRef.current.getStatusAsync();
+          if (status.isLoaded && !status.isPlaying) {
+            await restEasyRef.current.playAsync();
+          }
+        }
+      }
+    };
+  
+    swapMusic();
+  }, [isInMinigame]);
+  
+  
 
   const handleFirstTouch = async () => {
     if (hasInteractedRef.current) return;
     hasInteractedRef.current = true;
-
+  
     try {
-      await soundRef.current?.playAsync();
+      const soundToPlay = isInMinigame ? minigameRef.current : restEasyRef.current;
+      const status = await soundToPlay?.getStatusAsync();
+  
+      if (status?.isLoaded && !status.isPlaying) {
+        await soundToPlay?.playAsync();
+      }
     } catch (err) {
       console.log("Failed to play audio:", err);
     }
   };
+  
+  
 
   return (
     <TouchableWithoutFeedback

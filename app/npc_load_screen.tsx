@@ -4,6 +4,7 @@ import { styles } from "../styles/styles";
 import { NPC } from "../components/NPC";
 import { Audio } from "expo-av";
 import { router } from "expo-router";
+import OverlayMusic from "@/components/OverlayMusic";
 
 export default function NPCLoadScreen({ npc }: { npc: NPC }) {
   const [stage, setStage] = useState<"start" | "playingMinigame" | "afterGame">(
@@ -22,6 +23,8 @@ export default function NPCLoadScreen({ npc }: { npc: NPC }) {
         sound.playAsync();
       }
     );
+    npc.recordSelectedIndex(index);
+    console.log(index);
     setSelectedDialogueIndex(index);
     setStage("playingMinigame");
   };
@@ -43,7 +46,6 @@ export default function NPCLoadScreen({ npc }: { npc: NPC }) {
     );
     if (gameResult === "tie") {
       setStage("playingMinigame");
-      setSelectedDialogueIndex(1);
       setGameResult(null)
       return;
     } else {
@@ -55,11 +57,13 @@ export default function NPCLoadScreen({ npc }: { npc: NPC }) {
   if (stage === "playingMinigame" && selectedDialogueIndex !== null) {
     const MinigameComponent = npc.getMinigameComponent(selectedDialogueIndex);
     return (
-      <View style={styles.container}>
-        {MinigameComponent && (
-          <MinigameComponent onComplete={handleMinigameComplete} />
-        )}
-      </View>
+      <OverlayMusic isInMinigame={true}>
+        <View style={styles.container}>
+          {MinigameComponent && (
+            <MinigameComponent onComplete={handleMinigameComplete} />
+          )}
+        </View>
+      </OverlayMusic>
     );
   }
 

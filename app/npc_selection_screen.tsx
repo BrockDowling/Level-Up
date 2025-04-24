@@ -9,6 +9,7 @@ import NPCLoadScreen from "./npc_load_screen";
 import GameWinScreen from "./game_win";
 import { NPC } from "@/components/NPC";
 import { Audio } from "expo-av";
+import OverlayMusic from "@/components/OverlayMusic";
 
 {
   /* Add the rest of the NPC's here */
@@ -24,7 +25,11 @@ export default function NPCSelectionScreen() {
   if (Pikachu.getCompleted()) npcList = npcList.filter(npc => npc.getName() !== "Pikachu");
 
   if (npcList.length == 0) {
-    return <GameWinScreen/>;
+    return (
+      <OverlayMusic isInMinigame={true}>
+        <GameWinScreen/>
+      </OverlayMusic>
+    );
   }
 
   if (selectedNPC) {
