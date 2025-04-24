@@ -39,7 +39,7 @@ export const TicTacToe: React.FC<{
         return squares[a];
       }
     }
-    if (checkBoard(squares)) return "C";
+    if (checkBoard(squares)) return "tie";
 
     return null;
   };
@@ -93,7 +93,7 @@ export const TicTacToe: React.FC<{
     const win = checkWinner(newBoard);
     if (win) {
       setWinner(win);
-      onComplete(win === "C" ? win : win === "X");
+      onComplete(win === "tie" ? win : win === "X");
     } else {
       setCurrentPlayer(player === "X" ? "O" : "X");
     }
@@ -115,7 +115,7 @@ export const TicTacToe: React.FC<{
     const win = checkWinner(newBoard);
     if (win) {
       setWinner(win);
-      onComplete(win === "C" ? win : win === "X");
+      onComplete(win === "tie" ? win : win === "X");
     } else {
       setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
     }

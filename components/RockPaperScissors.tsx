@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 
 const choices = ['Rock', 'Paper', 'Scissors'];
 
-
-
 export const RockPaperScissors: React.FC<{
   onComplete: (result: boolean | string) => void;
 }> = ({ onComplete }) => {
@@ -21,20 +19,20 @@ export const RockPaperScissors: React.FC<{
   };
   const getResult = (userChoice, computerChoice) => {
     if (userChoice === computerChoice) {
-      console.log("It's a Tie!");
-      onComplete("C");
+      console.log("Passing in tie");
+      onComplete("tie");
     } else if (
       (userChoice === 'Rock' && computerChoice === 'Scissors') ||
       (userChoice === 'Paper' && computerChoice === 'Rock') ||
       (userChoice === 'Scissors' && computerChoice === 'Paper')
     ) {
-      console.log('You Win!');
+      console.log("Passing in win");
       onComplete(true);
     } else {
-    console.log('You Lose!');
-    onComplete(false);
-  };
-}
+      console.log("passing in lose");
+      onComplete(false);
+  }
+};
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Rock Paper Scissors</Text>

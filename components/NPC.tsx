@@ -18,17 +18,19 @@ export class NPC {
   private asset: any;
   private openingQuestion: string;
   private dialogue: DialogueOption[];
+  private completed: boolean;
 
   constructor(
     name: string,
     asset: any,
     openingQuestion: string,
-    dialogue: DialogueOption[]
+    dialogue: DialogueOption[],
   ) {
     this.name = name;
     this.asset = asset;
     this.openingQuestion = openingQuestion;
     this.dialogue = dialogue;
+    this.completed = false;
   }
 
   public getName(): string {
@@ -37,6 +39,10 @@ export class NPC {
 
   public getAsset(): any {
     return this.asset;
+  }
+
+  public getCompleted(): any {
+    return this.completed;
   }
 
   public getOpeningQuestion(): string {
@@ -78,5 +84,10 @@ export class NPC {
       return this.dialogue[index].failureFollowUpOptions;
 
     return this.dialogue[index].tieFollowUpOptions;
+  }
+
+  public toggleCompleted() {
+    if (this.completed) this.completed=false;
+    else if (!this.completed) this.completed=true;
   }
 }

@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import { styles } from "../styles/styles";
 import { NPC } from "../components/NPC";
 import { Audio } from "expo-av";
+import { router } from "expo-router";
 
 export default function NPCLoadScreen({ npc }: { npc: NPC }) {
   const [stage, setStage] = useState<"start" | "playingMinigame" | "afterGame">(
@@ -26,7 +27,7 @@ export default function NPCLoadScreen({ npc }: { npc: NPC }) {
   };
 
   const handleMinigameComplete = (result: boolean | string) => {
-    if (result === "C") {
+    if (result === "tie") {
       setGameResult("tie");
     } else {
       setGameResult(result ? "success" : "failure");
@@ -40,9 +41,15 @@ export default function NPCLoadScreen({ npc }: { npc: NPC }) {
         sound.playAsync();
       }
     );
-    setStage("start");
-    setSelectedDialogueIndex(null);
-    setGameResult(null);
+    if (gameResult === "tie") {
+      setStage("playingMinigame");
+      setSelectedDialogueIndex(1);
+      setGameResult(null)
+      return;
+    } else {
+      npc.toggleCompleted();
+      router.push("/game");
+    }
   };
 
   if (stage === "playingMinigame" && selectedDialogueIndex !== null) {

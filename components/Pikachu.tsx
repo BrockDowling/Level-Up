@@ -1,7 +1,7 @@
 import { NPC } from './NPC';
 import { RockPaperScissors } from './RockPaperScissors';
 
-export const RPSNPC = new NPC(
+export const Pikachu = new NPC(
   "Pikachu",
   require('../assets/images/pikachu.png'),
   "Pikachu approaches, wanting to play a game with you.",
